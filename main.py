@@ -19,7 +19,7 @@ def process(**kwargs):
         compress = lzwcompress.LzwCompress(file_dir, bits_number, dictionary_size)
         compress.start_compress()
 
-    elif option == 'descompress':
+    elif option == 'decompress':
         pass
     
 
