@@ -17,10 +17,23 @@ class LzwCompress():
 
     def open_file(self):
 
-        with open(self._file_dir, encoding='latin-1') as f:
-            data = f.read()
+        bytes_data = []
+        with open(self._file_dir, mode='rb') as f:
 
-        return data
+            while (byte := f.read(1)):
+                bytes_data.append(byte)
+                # print(byte)
+                # print(type(bytes_data[0]))
+            # data = f.read()
+
+        # with open("myfile", "rb") as f:
+
+        # for byte in bytes_data:
+        #     a = b''+byte
+
+        # print(bytes_data)
+        # exit()
+        return bytes_data
 
     def write_compress_file(self, compressed_data=list):
 
@@ -37,19 +50,24 @@ class LzwCompress():
 
         data = self.open_file()
 
-        string = ""
+        string = b""
         compressed_data = []
 
         for character in tqdm(data):
 
             symbol = string + character
 
+            print(symbol)
+            # exit()
+
             if symbol in self._dictionary:
                 string = symbol
 
             else:
 
-                compressed_data.append(self._dictionary[string])
+                if string:
+                    # pass
+                    compressed_data.append(self._dictionary[string])
 
                 if(len(self._dictionary) <= self._table_edge):
 
@@ -59,7 +77,7 @@ class LzwCompress():
                 string = character
 
         if string in self._dictionary:
-
+            print()
             compressed_data.append(self._dictionary[string])
-
+        exit
         self.write_compress_file(compressed_data)
