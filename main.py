@@ -17,8 +17,9 @@ def process(**kwargs):
         # dictionary_size = kwargs.get('dictionary_size')
 
         compress = lzwcompress.LzwCompress(file_dir, bits_number)
+
         print(f'K={bits_number}, Dictionary_size={pow(2,bits_number)}')
-        print('COMPRESSING')
+        print('COMPRESSING...')
 
         compress.start_compress()
 

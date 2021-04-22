@@ -11,8 +11,9 @@ class LzwCompress():
 
         self._file_dir = file_dir
         self._table_edge = pow(2, bits_number)
-        self.aux_dictionary_size = 256
-        self._dictionary = {chr(i): i for i in range(self.aux_dictionary_size)}
+        self.bytes_dictionary_size = 256
+        self._dictionary = {chr(i): i for i in range(
+            self.bytes_dictionary_size)}
 
     def open_file(self):
 
@@ -52,8 +53,8 @@ class LzwCompress():
 
                 if(len(self._dictionary) <= self._table_edge):
 
-                    self._dictionary[symbol] = self.aux_dictionary_size
-                    self.aux_dictionary_size += 1
+                    self._dictionary[symbol] = self.bytes_dictionary_size
+                    self.bytes_dictionary_size += 1
 
                 string = character
 
