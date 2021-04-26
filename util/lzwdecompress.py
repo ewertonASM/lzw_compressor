@@ -45,15 +45,15 @@ class LzwDecompress():
 
         for byte in self._compressed_data:  
 
-            if byte not in self._dictionary:
-                self._dictionary[byte] = string + string[0]
+            if byte in self._dictionary:
+                decompressed_data += self._dictionary[byte]
 
-            decompressed_data += self._dictionary[byte]
-
-            if len(string) > 0:
+            else:
                 self._dictionary[self._dictionary_size] = string + self._dictionary[byte][0]
                 self._dictionary_size += 1
-            
+
             string = self._dictionary[byte]
         
+        print(self._dictionary)
+
         self.write_decompressed_file(decompressed_data)
