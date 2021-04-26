@@ -1,4 +1,4 @@
-from util import lzwcompress
+from util import lzwcompress, lzwdecompress
 import fire
 
 
@@ -20,7 +20,13 @@ def process(**kwargs):
         compress.start_compress()
 
     elif option == 'decompress':
-        pass
+
+        file_dir = kwargs.get('input_file')
+        bits_number = kwargs.get('bits_number')
+        dictionary_size = kwargs.get('dictionary_size')
+
+        decompress = lzwdecompress.LzwCompress(file_dir, bits_number, dictionary_size)
+        decompress.start_decompression()
     
 
 
