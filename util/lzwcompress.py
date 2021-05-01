@@ -1,8 +1,9 @@
 from pathlib import Path
-from struct import pack
+from struct import pack, unpack
 from tqdm import tqdm
 import fire
 import re
+
 
 
 class LzwCompress():
@@ -14,13 +15,14 @@ class LzwCompress():
         self.bytes_dictionary_size = 256
         self._dictionary = {chr(i): i for i in range(
             self.bytes_dictionary_size)}
+        # self._compressed_data = []
 
     def open_file(self):
 
-        with open(self._file_dir, encoding='latin-1') as f:
+        with open(self._file_dir, 'rb') as f:
             data = f.read()
-
         return data
+        
 
     def write_compress_file(self, compressed_data=list):
 
@@ -31,7 +33,8 @@ class LzwCompress():
         with open(f'./output/{output_dir}', 'wb') as output:
 
             for data in compressed_data:
-                output.write(pack('>H', int(data)))
+                # print(type(data))
+                output.write(pack('>I', data))
 
     def start_compress(self):
 
@@ -42,7 +45,9 @@ class LzwCompress():
 
         for character in tqdm(data):
 
-            symbol = string + character
+    
+
+            symbol = string + chr(character)
 
             if symbol in self._dictionary:
                 string = symbol
@@ -56,10 +61,12 @@ class LzwCompress():
                     self._dictionary[symbol] = self.bytes_dictionary_size
                     self.bytes_dictionary_size += 1
 
-                string = character
+                string = chr(character)
 
         if string in self._dictionary:
 
             compressed_data.append(self._dictionary[string])
 
         self.write_compress_file(compressed_data)
+
+        # print(self._dictionary, self.bytes_dictionary_size)
