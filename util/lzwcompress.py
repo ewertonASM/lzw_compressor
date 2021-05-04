@@ -5,7 +5,6 @@ import fire
 import re
 
 
-
 class LzwCompress():
 
     def __init__(self, file_dir=str, bits_number=int):
@@ -22,7 +21,6 @@ class LzwCompress():
         with open(self._file_dir, 'rb') as f:
             data = f.read()
         return data
-        
 
     def write_compress_file(self, compressed_data=list):
 
@@ -45,8 +43,6 @@ class LzwCompress():
 
         for character in tqdm(data):
 
-    
-
             symbol = string + chr(character)
 
             if symbol in self._dictionary:
@@ -68,5 +64,3 @@ class LzwCompress():
             compressed_data.append(self._dictionary[string])
 
         self.write_compress_file(compressed_data)
-
-        # print(self._dictionary, self.bytes_dictionary_size)
