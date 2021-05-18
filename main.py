@@ -14,7 +14,6 @@ def process(**kwargs):
 
         file_dir = kwargs.get('input_file')
         bits_number = kwargs.get('bits_number')
-        # dictionary_size = kwargs.get('dictionary_size')
 
         compress = lzwcompress.LzwCompress(file_dir, bits_number)
 
@@ -27,7 +26,6 @@ def process(**kwargs):
 
         file_dir = kwargs.get('input_file')
         bits_number = kwargs.get('bits_number')
-        # dictionary_size = kwargs.get('dictionary_size')
 
         decompress = lzwdecompress.LzwDecompress(file_dir, bits_number)
 

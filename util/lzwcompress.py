@@ -1,9 +1,9 @@
 from pathlib import Path
-from struct import pack, unpack
+from struct import pack
 from tqdm import tqdm
-import fire
 import re
 
+encoding = 'latin-1'
 
 class LzwCompress():
 
@@ -12,27 +12,32 @@ class LzwCompress():
         self._file_dir = file_dir
         self._table_edge = pow(2, bits_number)
         self.bytes_dictionary_size = 256
-        self._dictionary = {chr(i): i for i in range(
+        self._dictionary = {i.to_bytes(1, 'big'):i for i in range(
             self.bytes_dictionary_size)}
-        # self._compressed_data = []
+
 
     def open_file(self):
 
+        data = []
         with open(self._file_dir, 'rb') as f:
-            data = f.read()
+            while True:
+                rec = f.read(1)
+                if len(rec) != 1:
+                    break
+                data.append(rec)
         return data
 
     def write_compress_file(self, compressed_data=list):
 
         Path("output").mkdir(parents=True, exist_ok=True)
-        output_dir = re.search(r'[^/]+(?=\.)', self._file_dir).group(0)+".lzw"
+        output_dir = re.search(r'[^/]+(?=$)', self._file_dir).group(0)+".lzw"
         print(output_dir)
 
         with open(f'./output/{output_dir}', 'wb') as output:
 
             for data in compressed_data:
-                # print(type(data))
-                output.write(pack('>I', data))
+
+                 output.write(pack('>I', data))
 
     def start_compress(self):
 
@@ -43,24 +48,26 @@ class LzwCompress():
 
         for character in tqdm(data):
 
-            symbol = string + chr(character)
+            symbol = string + character.decode(encoding) 
 
-            if symbol in self._dictionary:
+            if symbol.encode(encoding) in self._dictionary:
+
                 string = symbol
 
             else:
 
-                compressed_data.append(self._dictionary[string])
+                encoded_chr = string.encode(encoding)
+                compressed_data.append(self._dictionary[encoded_chr])
 
                 if(len(self._dictionary) <= self._table_edge):
 
-                    self._dictionary[symbol] = self.bytes_dictionary_size
+                    self._dictionary[symbol.encode(encoding)] = self.bytes_dictionary_size
                     self.bytes_dictionary_size += 1
 
-                string = chr(character)
+                string = character.decode(encoding)
 
-        if string in self._dictionary:
+        if string.encode(encoding) in self._dictionary:
 
-            compressed_data.append(self._dictionary[string])
+            compressed_data.append(self._dictionary[string.encode(encoding)])
 
         self.write_compress_file(compressed_data)
