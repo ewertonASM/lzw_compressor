@@ -1,18 +1,18 @@
-import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 from os import stat
+import re
 
 class Report_Generator:
 
-    def __init__(self, compressed_times, num_of_indexes, input_file, compressed_sizes, num_bits):
+    def __init__(self, compression_times, num_of_indexes, input_file, compressed_sizes, num_bits):
 
-        self._compressed_times = compressed_times
+        self._compression_times = compression_times
         self._num_of_indexes = num_of_indexes
         self._input_file = input_file
         self._compressed_sizes = compressed_sizes
         self._num_bits = num_bits
         
         rc = self.calculate_size()
-        print(f'Compression ratio: {rc}\nElapsed times: {self._compressed_times}\nNum of indexes: {self._num_of_indexes}\n' + '_'*50 + '\n')
         self.graph_generator(rc)
 
 
@@ -20,44 +20,35 @@ class Report_Generator:
 
         input_size = stat(self._input_file).st_size
         
-        compressed_ratios = []
+        compression_ratios = []
 
         for output_size in self._compressed_sizes:
-            compressed_ratios.append((input_size*8)/(output_size*self._num_bits)) 
+            compression_ratios.append((input_size*8)/(output_size*self._num_bits)) 
 
-        return compressed_ratios
+        return compression_ratios
         
 
-    def graph_generator(self, compress_ratio):
+    def graph_generator(self, compression_ratios):
+        
+        kbits = [i for i in range(9, 17)]
+        
+        input_name = re.search(r'[^/]+(?=\.)', self._input_file).group(0)
 
-        compression_ratio_fig = go.Figure(
-            data=[go.Scatter(x=[i for i in range(9, 17)],
-                            y=compress_ratio)],
-            layout=go.Layout(title="Compression ratio by K",
-                            xaxis_title="K",
-                            yaxis_title="Compression ratio"),
-        )
-        compression_ratio_fig.write_image("../results/compression_rate_x_k.png")
+        _fig0, ax0 = plt.subplots(nrows=1, ncols=1)
 
-        time_fig = go.Figure(
-            data=[go.Scatter(x=[i for i in range(9, 17)], y=self._compressed_times)],
-            layout=go.Layout(title="Processing time by K",
-                            xaxis=dict(
-                                title="K"
-                            ),
-                            yaxis_title="Time in s")
-        )
+        ax0.set_title('Compression ratios by K-bits')
+        ax0.set(xlabel='K-bits', ylabel='Compression Ratios', title='Compression Ratios by K-bits')
+        ax0.plot(kbits, compression_ratios)
+        plt.savefig(f'./results/graph_RC({input_name}).png')
 
-        time_fig.write_image("../results/time_x_k.png")
+        _fig1, ax1 = plt.subplots(nrows=1, ncols=1)
+        ax1.set_title('Compression times by K-bits')
+        ax1.set(xlabel='K-bits', ylabel='Compression Times', title='Compression Times by K-bits')
+        ax1.plot(kbits, self._compression_times)
+        plt.savefig(f'./results/graph_Compression_time({input_name}).png')
 
-        indices_fig = go.Figure(
-            data=[go.Scatter(x=[i for i in range(9, 17)], y=self._num_of_indexes)],
-            layout=go.Layout(title="Indexes by K",
-                            xaxis=dict(
-                                title="K",
-                                tickmode='linear'
-                            ),
-                            yaxis_title="Number of indexes")
-        )
-
-        indices_fig.write_image("../results/indices_x_k.png")
+        _fig2, ax2 = plt.subplots(nrows=1, ncols=1)
+        ax2.set_title('Number of indexes by K-bits')
+        ax2.set(xlabel='K-bits', ylabel='Number of indexes', title='Num. of indexes by K-bits')
+        ax2.plot(kbits, self._num_of_indexes)
+        plt.savefig(f'./results/graph_indexes({input_name}).png')

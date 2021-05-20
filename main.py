@@ -10,7 +10,7 @@ def compress(bits_number, input_file, painter):
 
     report_generator = reportgenerator.Report_Generator
 
-    compressed_times, compressed_sizes, num_indexes = [], [], []
+    compression_times, compressed_sizes, num_indexes = [], [], []
 
     bits_number_list = [bits_number] if bits_number else [number for number in range(9,17)]
         
@@ -21,13 +21,13 @@ def compress(bits_number, input_file, painter):
         print(log)
         print('COMPRESSING...')
 
-        compress_time, len_compressed_data, compressed_size= compress.start_compress(color)
+        compress_time, len_compressed_data, compressed_size = compress.start_compress(color)
 
-        compressed_times.append(compress_time)
+        compression_times.append(compress_time)
         compressed_sizes.append(compressed_size)
         num_indexes.append(len_compressed_data)
 
-    report_generator(compressed_times, num_indexes, input_file, compressed_sizes, kbit)
+    report_generator(compression_times, num_indexes, input_file, compressed_sizes, kbit)
 
 
 def decompress(bits_number, input_file, painter):
@@ -52,13 +52,13 @@ def process(operation=str, input_file=str, bits_number=None):
 
 if __name__ == '__main__':
     
-    # try:
+    try:
         fire.Fire(process)
-    # except:
-    #     print("---------------------------------------------------------------------------------------------")
-    #     print("Error: Invalid Params")
-    #     print("\nFOR COMPRESS, TRY:")
-    #     print('python main.py -input_file "input/corpus16MB.txt" -bits_number "9" -operation "compress"')
-    #     print("\nFOR DECOMPRESS, TRY:")
-    #     print('python main.py -input_file "output/corpus16MB.txt" -bits_number "9" -operation "decompress"')
-    #     print("---------------------------------------------------------------------------------------------")
+    except:
+        print("---------------------------------------------------------------------------------------------")
+        print("Error: Invalid Params")
+        print("\nFOR COMPRESS, TRY:")
+        print('python main.py -input_file "input/corpus16MB.txt" -bits_number "9" -operation "compress"')
+        print("\nFOR DECOMPRESS, TRY:")
+        print('python main.py -input_file "output/corpus16MB.txt" -bits_number "9" -operation "decompress"')
+        print("---------------------------------------------------------------------------------------------")
