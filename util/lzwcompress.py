@@ -1,6 +1,7 @@
 from pathlib import Path
 from struct import pack
 from tqdm import tqdm
+import time
 import re
 
 encoding = 'latin-1'
@@ -18,14 +19,9 @@ class LzwCompress():
 
     def open_file(self):
 
-        data = []
         try:
-            with open(self._file_dir, 'rb') as f:
-                while True:
-                    rec = f.read(1)
-                    if len(rec) != 1:
-                        break
-                    data.append(rec)
+            with open(self._file_dir, 'r', encoding='latin-1') as f:
+                data = f.read()
             return data
             
         except:
@@ -34,13 +30,15 @@ class LzwCompress():
     def write_compress_file(self, compressed_data=list):
 
         Path("output").mkdir(parents=True, exist_ok=True)
-        output_dir = re.search(r'[^/]+(?=$)', self._file_dir).group(0)+".lzw"
-        print(output_dir)
+        output_dir = f"./output/{re.search(r'[^/]+(?=$)', self._file_dir).group(0)}.lzw"
 
-        with open(f'./output/{output_dir}', 'wb') as output:
+
+        with open(output_dir, 'wb') as output:
 
             for data in compressed_data:
-                 output.write(pack('>I', data))
+                 output.write(pack('>H', data))
+
+        return output_dir
 
     def start_compress(self, color):
 
@@ -49,9 +47,11 @@ class LzwCompress():
         string = ""
         compressed_data = []
 
+        start = time.time()
+
         for character in tqdm(data, colour=color):
 
-            symbol = string + character.decode(encoding) 
+            symbol = string + character
 
             if symbol.encode(encoding) in self._dictionary:
                 string = symbol
@@ -65,11 +65,18 @@ class LzwCompress():
                     self._dictionary[symbol.encode(encoding)] = self.bytes_dictionary_size
                     self.bytes_dictionary_size += 1
 
-                string = character.decode(encoding)
+                string = character
 
         if string.encode(encoding) in self._dictionary:
             compressed_data.append(self._dictionary[string.encode(encoding)])
 
-        self.write_compress_file(compressed_data)
+        end = time.time()
+        compress_time = end - start
+
+        print(f'Elapsed time is {end - start}s')
+
+        output_dir = self.write_compress_file(compressed_data)
+
+        return compress_time, len(compressed_data), len(compressed_data)
 
         
