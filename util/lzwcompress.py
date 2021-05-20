@@ -16,7 +16,6 @@ class LzwCompress():
         self._dictionary = {i.to_bytes(1, 'big'):i for i in range(
             self.bytes_dictionary_size)}
 
-
     def open_file(self):
 
         try:
@@ -32,32 +31,24 @@ class LzwCompress():
         Path("output").mkdir(parents=True, exist_ok=True)
         output_dir = f"./output/{re.search(r'[^/]+(?=$)', self._file_dir).group(0)}.lzw"
 
-
         with open(output_dir, 'wb') as output:
-
             for data in compressed_data:
                  output.write(pack('>H', data))
-
-        return output_dir
 
     def start_compress(self, color):
 
         data = self.open_file()
-
         string = ""
         compressed_data = []
 
         start = time.time()
-
         for character in tqdm(data, colour=color):
 
             symbol = string + character
 
             if symbol.encode(encoding) in self._dictionary:
                 string = symbol
-
             else:
-
                 encoded_chr = string.encode(encoding)
                 compressed_data.append(self._dictionary[encoded_chr])
 
@@ -75,7 +66,7 @@ class LzwCompress():
 
         print(f'Elapsed time is {end - start}s')
 
-        output_dir = self.write_compress_file(compressed_data)
+        self.write_compress_file(compressed_data)
 
         return compress_time, len(compressed_data), len(compressed_data)
 
