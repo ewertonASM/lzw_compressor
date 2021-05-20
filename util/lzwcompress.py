@@ -19,13 +19,17 @@ class LzwCompress():
     def open_file(self):
 
         data = []
-        with open(self._file_dir, 'rb') as f:
-            while True:
-                rec = f.read(1)
-                if len(rec) != 1:
-                    break
-                data.append(rec)
-        return data
+        try:
+            with open(self._file_dir, 'rb') as f:
+                while True:
+                    rec = f.read(1)
+                    if len(rec) != 1:
+                        break
+                    data.append(rec)
+            return data
+            
+        except:
+            print("ERROR: File not found")
 
     def write_compress_file(self, compressed_data=list):
 
@@ -36,22 +40,20 @@ class LzwCompress():
         with open(f'./output/{output_dir}', 'wb') as output:
 
             for data in compressed_data:
-
                  output.write(pack('>I', data))
 
-    def start_compress(self):
+    def start_compress(self, color):
 
         data = self.open_file()
 
         string = ""
         compressed_data = []
 
-        for character in tqdm(data):
+        for character in tqdm(data, colour=color):
 
             symbol = string + character.decode(encoding) 
 
             if symbol.encode(encoding) in self._dictionary:
-
                 string = symbol
 
             else:
@@ -60,14 +62,14 @@ class LzwCompress():
                 compressed_data.append(self._dictionary[encoded_chr])
 
                 if(len(self._dictionary) <= self._table_edge):
-
                     self._dictionary[symbol.encode(encoding)] = self.bytes_dictionary_size
                     self.bytes_dictionary_size += 1
 
                 string = character.decode(encoding)
 
         if string.encode(encoding) in self._dictionary:
-
             compressed_data.append(self._dictionary[string.encode(encoding)])
 
         self.write_compress_file(compressed_data)
+
+        

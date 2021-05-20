@@ -36,7 +36,7 @@ class LzwDecompress():
             for data in decompressed_data:
                 result.write(data)
 
-    def start_decompression(self):
+    def start_decompression(self, color):
 
         self.open_file()
 
@@ -44,7 +44,7 @@ class LzwDecompress():
 
         decompressed_data = []
 
-        for code in tqdm(self._compressed_data):
+        for code in tqdm(self._compressed_data, colour=color):
 
             if not code in self._dictionary:
                 self._dictionary[code] = (string + string[0]).encode(encoding)
