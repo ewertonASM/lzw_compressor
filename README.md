@@ -11,7 +11,7 @@
 ## 1. Equipe 
 
 [Ewerton Moura](https://github.com/ewertonASM),
-[Renan](https://github.com/Renan-Goes)
+[Renan Goes](https://github.com/Renan-Goes)
 
 
 ## 2. Metodologia ⚙️
