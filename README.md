@@ -43,7 +43,7 @@ Os arquivos utilizados para teste foram os pedidos na escecificação ("02.mp4" 
 
 ### 3.1 Arquivo de texto 📝
 
-*Corpus 16 MB*
+*Texto TXT 16 MB*
 
 <p align="center">
   <img width="450px" src="./results/graphs/graph_Compression_time_corpus.png">
@@ -61,20 +61,31 @@ Os arquivos utilizados para teste foram os pedidos na escecificação ("02.mp4" 
   <img width="450px" src="./results/graphs/graph_RC_video.png">
 </p>
 
+### 3.3 Compreensão dos gráficos
+
+Como pode ser observado no gráfico do número de índices, quanto maior maior a quantidade de 
+bits, menor a quantidade de índices utilizados na compressão, isso porque mais casos podem 
+ser armazenados no dicionário, logo, são necessários menos índices para representar o arquivo 
+comprimido. Além disso, como o ".mp4" é um formato já comprimido, pode ser observado que a 
+quantidade de índices diminui menos e de forma mais lenta.
+
+Já no gráfico de razão de compressão, no arquivo de texto RC aumenta linearmente em relação a quantidade 
+de bits, enquanto no vídeo aumenta exponencialmente.
+
 # 4. Rodando a aplicação 🏃‍♂️
 
-## 4.1. Requisitos:
+### 4.1. Requisitos:
 
 Antes de rodar a aplicação, é necessário instalar as depêndencias com os seguintes comandos:
 <br>
 <br>
 `pip install -r requirements.txt`
 
-## 4.2. Compress 
+### 4.2. Compress 
 `python main.py -input_file "input/corpus16MB.txt" -bits_number "9" -operation "compress"`
 <br>
-## 4.3. Decompress
+### 4.3. Decompress
 `python main.py -input_file "output/02.mp4.lzw" -bits_number "9" -operation "decompress"`
 <br>
-## 4.4. Obs 🔎
+### 4.4. Obs 🔎
 Na compressão, o parâmetro `bits_number` é opcional, se não for usado, o intervalo entre 9 e 16 será usado. 
