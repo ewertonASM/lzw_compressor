@@ -46,9 +46,9 @@ Os arquivos utilizados para teste foram os pedidos na escecificação ("02.mp4" 
 *Corpus 16 MB*
 
 <p align="center">
-  <img width="600px" src="./results/graphs/graph_Compression_time_corpus.png">
-  <img width="600px" src="./results/graphs/graph_indexes_corpus.png">
-  <img width="600px" src="./results/graphs/graph_RC_corpus.png">
+  <img width="450px" src="./results/graphs/graph_Compression_time_corpus.png">
+  <img width="450px" src="./results/graphs/graph_indexes_corpus.png">
+  <img width="450px" src="./results/graphs/graph_RC_corpus.png">
 </p>
 
 ### 3.2 Arquivo de vídeo 🎞️
@@ -56,9 +56,9 @@ Os arquivos utilizados para teste foram os pedidos na escecificação ("02.mp4" 
 *Video MP4 2,01 MB*
 
 <p align="center">
-  <img width="600px" src="./results/graphs/graph_Compression_time_video.png">
-  <img width="600px" src="./results/graphs/graph_indexes_video.png">
-  <img width="600px" src="./results/graphs/graph_RC_video.png">
+  <img width="450px" src="./results/graphs/graph_Compression_time_video.png">
+  <img width="450px" src="./results/graphs/graph_indexes_video.png">
+  <img width="450px" src="./results/graphs/graph_RC_video.png">
 </p>
 
 # 4. Rodando a aplicação 🏃‍♂️
