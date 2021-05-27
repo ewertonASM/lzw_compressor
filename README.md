@@ -3,7 +3,7 @@
 ## **Sumário:**
 
 1. Equipe
-2. Pontos a serem avaliados
+2. Pontos avaliados
 3. Metodologia
 4. Análise de Resultados
 5. Rodando a aplicação
@@ -14,12 +14,12 @@
 [Ewerton Moura](https://github.com/ewertonASM),
 [Renan Goes](https://github.com/Renan-Goes)
 
-## **2. Pontos a serem avaliados:** <br>
-## &emsp; 2.1. Desenvolveu em qual linguagem? Fez utilizando PPMC ou LZW? Utilizou alguma biblioteca como base?
+## **2. Pontos avaliados:** <br>
+### &emsp; **2.1. Desenvolveu em qual linguagem? Fez utilizando PPMC ou LZW? Utilizou alguma biblioteca como base?**
   
-&emsp;O algoritmo escolhido foi o LZW, A solução foi desenvolvida em python, usando suas estruturas de dados nativas, bibliotecas auxiliares foram ultilizadas apenas para salvar o arquivo.<br>
+&emsp;&emsp;O algoritmo escolhido foi o LZW, A solução foi desenvolvida em python, usando suas estruturas de dados nativas, bibliotecas auxiliares foram ultilizadas apenas para salvar o arquivo.<br>
 
-## &emsp; 2.2. A compressão e descompressão funcionou para os 2 arquivos de testes?
+### &emsp; **2.2. A compressão e descompressão funcionou para os 2 arquivos de testes?**
   * **No arquivo de texto, teve algum problema com os caracteres acentuados?**
   <br>Dado, o uso do enconding *ISO/IEC 8859-1*, também conhecido como *latin-1* possibilitou fazer as codificações na compressão sem trazer problemas a caracteres 
   acentuados ou aos bytes que os representavam.
@@ -28,16 +28,16 @@
   * **O arquivo de vídeo continua sendo "tocável" após a descompressão?**
   <br>Os arquivos mantiveram sua integridade após sua descompressão, sendo possivel reproduzi-los normalmente.
 
-## &emsp; 2.3. Conseguiu fazer com todos os Ks entre 9 e 16?
- &emsp;Todos os valores para *K* especificados foram usados para conpressão e descompressão e não houve nenhum problema no seu uso.
+### &emsp; **2.3. Conseguiu fazer com todos os Ks entre 9 e 16?**
+ &emsp;&emsp;Todos os valores para *K* especificados foram usados para conpressão e descompressão e não houve nenhum problema no seu uso.
 
-## &emsp; 2.4. Conseguiu salvar a quantidade exata de K bits no arquivo?
+### &emsp; **2.4. Conseguiu salvar a quantidade exata de K bits no arquivo?**
  * **Usou qual técnica? Conversão de bits para String? Bitstream? Salvou todos os índices em 2 bytes?**
   <br>Para gerar o arquivo foi ultilizado o metodo *Pack* da biblioteca *Struct*, nativa do python, o que possibilitou salvar todos os indices em 2 bytes. 
   Além disso, também foi necessário fazer uma conversão de bits para string e vice-versa na implementação do algoritmo, para fazer a concatenação dos bytes, 
   por ser o método mais fácil.
 
-## &emsp; 2.4. Apresentou a curva *RC x K* e *Tempo x K* para os 2 arquivos de testes?
+### &emsp; **2.4. Apresentou a curva *RC x K* e *Tempo x K* para os 2 arquivos de testes?**
  * **Utilizou como equação do RC?**
   <br>A equação utilizada foi: *RC = tamArqOriginal / ((totalIndices\*K)/8)*
 
