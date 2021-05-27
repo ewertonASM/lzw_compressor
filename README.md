@@ -14,6 +14,34 @@
 [Renan Goes](https://github.com/Renan-Goes)
 
 
+
+
+## Pontos a serem avaliados no relatório:<br>
+## 1. Desenvolveu em qual linguagem? Fez utilizando PPMC ou LZW? Utilizou alguma biblioteca como base?
+  * **O algoritmo escolhido foi o LZW, A solução foi desenvolvida em python, usando suas estruturas de dados nativas, bibliotecas auxiliares**
+  <br>foram ultilizadas apenas para salvar o arquivo.
+
+## 2. A compressão e descompressão funcionou para os 2 arquivos de testes?
+  * **No arquivo de texto, teve algum problema com os caracteres acentuados?**
+  <br>Dado, o uso do enconding *ISO/IEC 8859-1*, também conhecido como *latin-1* possibilitou fazer as codificações na compressão sem 
+  trazer problemas a caracteres acentuados ou aos bytes que os representavam.
+  * **Se não funcionou perfeitamente, qual o problema que ocorreu?**
+  <br>Não ocorreram problemas.
+  * **O arquivo de vídeo continua sendo "tocável" após a descompressão?**
+  <br>Os arquivos mantiveram sua integridade após sua descompressão, sendo possivel reproduzi-los normalmente.
+
+## 3. Conseguiu fazer com todos os Ks entre 9 e 16?
+  Todos os valores para *K* especificados foram usados para conpressão e descompressão e não houve nenhum problema no seu uso.
+
+## 4. Conseguiu salvar a quantidade exata de K bits no arquivo?
+  * **Usou qual técnica? Conversão de bits para String? Bitstream? Salvou todos os índices em 2 bytes?**
+  <br>Para gerar o arquivo foi ultilizado o metodo *Pack* da biblioteca *Struct*, nativa do python, o que possibilitou salvar todos os indices em 2 bytes 
+
+## 5. Apresentou a curva RCxK e TempoxK para os 2 arquivos de testes?
+  * **Utilizou como equação do RC?**
+  <br>A equação utilizada foi: *RC = tamArqOriginal / ((totalIndices\*K)/8)*
+
+
 ## 2. Metodologia ⚙️
 
 Para o desenvolvimento do projeto foi necessário instalar algumas bibliotecas não-nativas do python para 
