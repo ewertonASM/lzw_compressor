@@ -3,9 +3,10 @@
 ## **Sumário:**
 
 1. Equipe
-2. Metodologia
-3. Análise de Resultados
-4. Equipe
+2. Pontos a serem avaliados
+3. Metodologia
+4. Análise de Resultados
+5. Rodando a aplicação
 
 
 ## **1. Equipe**
@@ -13,7 +14,7 @@
 [Ewerton Moura](https://github.com/ewertonASM),
 [Renan Goes](https://github.com/Renan-Goes)
 
-## **2. Pontos a serem avaliados no relatório:** <br>
+## **2. Pontos a serem avaliados:** <br>
 ## &emsp; 2.1. Desenvolveu em qual linguagem? Fez utilizando PPMC ou LZW? Utilizou alguma biblioteca como base?
   
 &emsp;O algoritmo escolhido foi o LZW, A solução foi desenvolvida em python, usando suas estruturas de dados nativas, bibliotecas auxiliares foram ultilizadas apenas para salvar o arquivo.<br>
