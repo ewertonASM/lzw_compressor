@@ -111,8 +111,10 @@ Antes de rodar a aplicação, é necessário instalar as depêndencias com os se
 ### **5.2. Compress** 
 >`python main.py -input_file "input/corpus16MB.txt" -bits_number "9" -operation "compress"`
 <br>
+
 ### **5.3. Decompress**
 >`python main.py -input_file "output/02.mp4.lzw" -bits_number "9" -operation "decompress"`
 <br>
+
 ### **5.4. Obs 🔎**
 Na compressão, o parâmetro `bits_number` é opcional, se não for usado, o intervalo entre 9 e 16 será usado. 
