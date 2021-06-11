@@ -12,7 +12,7 @@ class LzwDecompress():
         self._file_dir = file_dir
         self._table_edge = pow(2, bits_number)
         self._dictionary_size = 256
-        self._dictionary = dict([(x, f'{x}'.enconde(encoding))
+        self._dictionary = dict([(x, f'{x}'.encode(encoding))
                                  for x in range(self._dictionary_size)])
         self._compressed_data = []
 
